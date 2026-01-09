@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html,
+body {
+  height: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  @apply bg-slate-50 text-slate-900;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+input,
+select,
+textarea {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+select option {
+  font-size: 16px;
+}
