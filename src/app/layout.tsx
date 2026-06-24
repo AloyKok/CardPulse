@@ -2,7 +2,7 @@ import "./globals.css";
 
 export const metadata = {
   title: "CardPulse",
-  description: "CardPulse storefront is under maintenance while we prepare the next version.",
+  description: "CardPulse is under maintenance.",
   icons: {
     icon: "/icon.png",
     apple: "/apple-icon.png"
