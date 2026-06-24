@@ -1,98 +1,52 @@
 import Link from "next/link";
 
-import { formatEventType } from "@/lib/events";
-import { formatAdmissionTimeRange, formatEventDateRange } from "@/lib/format";
-import { sampleEvents } from "@/lib/mock/events";
-import { listPublishedEvents } from "@/lib/queries/events";
-import type { Event } from "@/lib/types";
-
-const loadEvents = async (): Promise<Event[]> => {
-  try {
-    return await listPublishedEvents();
-  } catch {
-    return sampleEvents;
-  }
-};
-
-export default async function Home() {
-  const events = await loadEvents();
-
+export default function Home() {
   return (
-    <main className="min-h-screen">
-      <div className="mx-auto flex w-full max-w-5xl flex-col gap-10 px-4 py-10 sm:px-6 sm:py-12">
-        <header className="flex flex-col gap-4">
-          <p className="text-sm uppercase tracking-[0.3em] text-slate-500">
+    <main className="grid min-h-screen place-items-center bg-[radial-gradient(circle_at_top_left,rgba(15,118,110,0.14),transparent_28rem),linear-gradient(180deg,#f8fafc_0%,#eef3f7_100%)] px-4 py-8">
+      <section className="w-full max-w-3xl overflow-hidden rounded-[28px] border border-slate-200 bg-white/95 shadow-2xl shadow-slate-900/10">
+        <div className="grid gap-6 p-7 sm:p-12">
+          <div className="flex items-center gap-3 text-xs font-black uppercase tracking-[0.18em] text-teal-700">
+            <span className="grid h-11 w-11 place-items-center rounded-2xl bg-slate-950 text-base tracking-normal text-white">
+              CP
+            </span>
             CardPulse
-          </p>
-          <h1 className="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl md:text-5xl">
-            Pokemon TCG events in Singapore, curated and accurate.
-          </h1>
-          <div className="flex flex-wrap gap-3">
-            <span className="rounded-full bg-slate-900 px-4 py-2 text-sm text-white">
-              This Week
-            </span>
-            <span className="rounded-full border border-slate-200 px-4 py-2 text-sm text-slate-600">
-              This Weekend
-            </span>
-            <span className="rounded-full border border-slate-200 px-4 py-2 text-sm text-slate-600">
-              Next 30 Days
-            </span>
-          </div>
-        </header>
-
-        <section className="flex flex-col gap-6">
-          <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
-            <h2 className="text-2xl font-semibold text-slate-900">
-              Upcoming events
-            </h2>
-            <span className="text-sm text-slate-500">Sorted by soonest</span>
           </div>
 
           <div className="grid gap-4">
-            {events.map((event) => (
-              <article
-                key={event.id}
-                className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6"
-              >
-                <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-                  <div className="flex flex-col gap-1">
-                    <h3 className="text-lg font-semibold text-slate-900">
-                      <Link
-                        className="transition hover:text-slate-700"
-                        href={`/events/${event.id}`}
-                      >
-                        {event.title}
-                      </Link>
-                    </h3>
-                    <p className="text-sm text-slate-600">
-                      {formatEventDateRange(event.start_at, event.end_at)}
-                    </p>
-                    <p className="text-sm text-slate-500">
-                      {event.venue_address}
-                    </p>
-                  </div>
-                  <div className="flex flex-wrap items-center gap-3">
-                    <span className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700">
-                      {formatEventType(event.event_type)}
-                    </span>
-                    <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600">
-                      {event.admission_fee.toLowerCase() === "free"
-                        ? "Free"
-                        : "Paid"}
-                    </span>
-                    <span className="text-xs text-slate-500">
-                      {formatAdmissionTimeRange(
-                        event.admission_time_start,
-                        event.admission_time_end
-                      )}
-                    </span>
-                  </div>
-                </div>
-              </article>
-            ))}
+            <h1 className="max-w-xl text-5xl font-black leading-[0.95] tracking-tight text-slate-950 sm:text-7xl">
+              Storefront under maintenance.
+            </h1>
+            <p className="max-w-2xl text-base font-semibold leading-7 text-slate-600 sm:text-lg">
+              We are preparing the public CardPulse storefront. The vendor admin
+              system remains available for authorized users.
+            </p>
           </div>
-        </section>
-      </div>
+
+          <div className="flex flex-wrap gap-3">
+            <Link
+              href="/admin"
+              className="inline-flex min-h-12 items-center justify-center rounded-2xl bg-slate-950 px-5 text-sm font-black text-white transition hover:bg-slate-800"
+            >
+              Open admin
+            </Link>
+          </div>
+        </div>
+
+        <div className="grid gap-3 border-t border-slate-200 bg-slate-50 px-7 py-5 text-sm sm:px-12">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <span className="text-xs font-black uppercase tracking-widest text-slate-500">
+              Status
+            </span>
+            <span className="font-black text-slate-950">Maintenance mode</span>
+          </div>
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <span className="text-xs font-black uppercase tracking-widest text-slate-500">
+              Admin system
+            </span>
+            <span className="font-black text-slate-950">Available at /admin</span>
+          </div>
+        </div>
+      </section>
     </main>
   );
 }

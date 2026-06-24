@@ -2,7 +2,11 @@ import "./globals.css";
 
 export const metadata = {
   title: "CardPulse",
-  description: "Discover upcoming Pokemon TCG events in Singapore."
+  description: "CardPulse storefront is under maintenance while we prepare the next version.",
+  icons: {
+    icon: "/icon.png",
+    apple: "/apple-icon.png"
+  }
 };
 
 export const viewport = {
